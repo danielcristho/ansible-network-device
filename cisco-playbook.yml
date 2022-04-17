@@ -1,0 +1,24 @@
+---
+- hosts: routers
+  gather_facts: false
+
+  tasks:
+    # - name: Create Loopback Interface
+    #   cisco.ios.ios_interface:
+    #     config:
+    #       - name: Loopback10
+    #         enabled: true
+
+    # - name: Add IP address
+    #   cisco.ios.l3_interface: #for layer 3 device
+    #     name: Loopback10
+    #     ipv4: 172.16.1.1/32  
+
+    - name: Show version 
+      ios_command:
+        commands: show version | incl Version
+      register: output
+
+    - name: print output
+      debug:
+        var: output.stdout_lines          
